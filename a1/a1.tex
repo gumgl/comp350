@@ -1,0 +1,118 @@
+\documentclass{article}
+
+\usepackage{amsmath, amssymb}
+
+\author{Guillaume Labranche (260585371)}
+\title{Assignment \#1\\Numerical Computing (COMP 350)}
+\date{due on 23 September 2015}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\F}{\mathbb{F}}
+
+\begin{document}
+
+\maketitle
+ 
+\begin{enumerate}%[(a)]
+ \item \textbf{No}. Let $x$ be a real number with finite binary representation and $x_i$ be the i\textsuperscript{th} bit after the point. The integer part can be represented in finite decimal form in all cases. For all $x_i$ in the fractional part, if the digit is $1$, its value within $x$ is $1/(2^i)$ and that in decimal form is finite,  so adding all $x_i$'s leads to a finite decimal representation.
+ \item $\boldsymbol{-23}$
+ \item 
+   \begin{enumerate}
+     \item $(2^4)/2-1=16/2-1=8-1=\boldsymbol{7}$
+     \item Normalized nonnegative range:
+     
+\begin{tabular}{ r|l|l|l|l| }
+\multicolumn{1}{r}{}
+ & \multicolumn{1}{c}{Sign}
+ & \multicolumn{1}{c}{Exponent}
+ & \multicolumn{1}{c}{Fraction}
+ & \multicolumn{1}{c}{Decimal Value} \\
+\cline{2-5}
+$N_{min}$ & $1$ & $(0001)_2=1$ & $(00000)_2$ & $(1.00000)_2 \cdot 2^{-6}=\boldsymbol{(1/64)_{10}}$
+ \\
+\cline{2-5}
+$N_{max}$ & $1$ & $(1110)_2=14$ & $(11111)_2$ & $(1.11111)_2 \cdot 2^7=\boldsymbol{(252)_{10}}$
+ \\
+\cline{2-5}
+\end{tabular}\\
+
+	\item Subnormal nonnegative range:
+	
+\begin{tabular}{ r|l|l|l|l| }
+\multicolumn{1}{r}{}
+ & \multicolumn{1}{c}{Sign}
+ & \multicolumn{1}{c}{Exponent}
+ & \multicolumn{1}{c}{Fraction}
+ & \multicolumn{1}{c}{Decimal Value} \\
+\cline{2-5}
+Smallest & $1$ & $(0000)_2=1$ & $(00001)_2$ & $(0.00001)_2 \cdot 2^{-6}=\boldsymbol{2^{-11}}$
+ \\
+\cline{2-5}
+Largest & $1$ & $(0000)_2=15$ & $(11111)_2$ & $(0.11111)_2 \cdot 2^{-6}=\boldsymbol{31/2^{-11}}$
+ \\
+\cline{2-5}
+\end{tabular}
+	
+	\item $\epsilon = \boldsymbol{2^{-5}}$
+	\item \textbf{10.75} and \textbf{11.15}
+	
+\begin{tabular}{ |l|l|l|l| }
+   \multicolumn{1}{c}{Sign}
+ & \multicolumn{1}{c}{Exponent}
+ & \multicolumn{1}{c}{Fraction}
+ & \multicolumn{1}{c}{Decimal Value} \\
+\cline{1-4}
+$1$ & $(1010)_2=10$ & $(01011)_2$ & $(1.01011)_2 \cdot 2^3=10.75$
+ \\
+\cline{1-4}
+$1$ & $(1010)_2=10$ & $(01100)_2$ & $(1.01100)_2 \cdot 2^3=11.0$
+ \\
+\cline{1-4}
+$1$ & $(1010)_2=10$ & $(01101)_2$ & $(1.01101)_2 \cdot 2^3=11.25$
+ \\
+\cline{1-4}
+\end{tabular}
+	\item \begin{align*} 
+	x   &=-(1.0110101)_2 \cdot 2^0 \\
+	x_+ &= -(1.01101)_2 \cdot 2^0 \\
+	x_- &= -(1.01110)_2 \cdot 2^0
+	\end{align*}
+	\begin{itemize}
+	  \item Round down: $x_- = -(1.01110)_2 \cdot 2^0$
+	  \item Round up: $x_+ = -(1.01101)_2 \cdot 2^0$
+	  \item Round towards zero: $x_+ = -(1.01101)_2 \cdot 2^0$
+	  \item Round to nearest: $x_+ = -(1.01101)_2 \cdot 2^0$
+	\end{itemize}
+
+   \end{enumerate}
+
+\item \begin{enumerate}
+\item \textbf{True}. When adding a number $x$ to itself, we are doubling its value ($2x$). In binary representation, this comes down to shifting the decimal point 1 position to the right, so the significant stays the same but $E$ is increased by $1$ when $x$ is in the form $(b_0 . b_1 b_2 \dotso b_{23})_2 \cdot 2^E$.
+\begin{align*}
+x \oplus x &= 2x \\
+\mbox{round}(x + x) &= 2x \\
+\mbox{round}(2x) &= 2x \\
+\mbox{round}(2 \cdot (b_0 . b_1 b_2 \dotso b_{23})_2 \cdot 2^E) &= 2 \cdot (b_0 . b_1 b_2 \dotso b_{23})_2 \cdot 2^E \\
+\mbox{round}((b_0 . b_1 b_2 \dotso b_{23})_2 \cdot 2^{E+1}) &= (b_0 . b_1 b_2 \dotso b_{23})_2 \cdot 2^{E+1}
+\end{align*}
+\item \textbf{False}. Counter-example (rounding mode is \textbf{round down}):
+\begin{align*}
+x&= & &(  &  1&.00000000000000000000000|  &  &)_2 \cdot 2^0 \\
+y&= & -&(  &  0&.11111111111111111111111|1  &  &)_2 \cdot 2^0 \\
+x-y&= & &(  &  0&.00000000000000000000000|1  &  &)_2 \cdot 2^0 \\
+\boldsymbol{x \ominus y} &= & &(  &  0&.00000000000000000000000|  &  &)_2 \cdot 2^0\\
+y-x&= & -&(  &  0&.00000000000000000000000|1  &  &)_2 \cdot 2^0 \\
+y \ominus x &= & -&(  &  0&.00000000000000000000001|  &  &)_2 \cdot 2^0 \\
+\boldsymbol{-(y \ominus x)} &= & &(  &  0&.00000000000000000000001|  &  &)_2 \cdot 2^0
+\end{align*}
+\end{enumerate}
+\item \begin{itemize}
+\item $\infty / 0 = \boldsymbol{\infty}$ (because $a/0=\infty$)
+\item $\infty / (- \infty) = \mbox{\textbf{NaN}}$ (any operation involving NaN results in NaN)
+\item $1^{\mbox{NaN}} = \mbox{\textbf{NaN}}$ (same reason)
+\item $-0/\mbox{NaN} = \mbox{\textbf{NaN}}$ (same reason)
+
+\end{itemize}
+
+\end{enumerate}
+\end{document}
