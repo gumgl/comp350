@@ -1,0 +1,14 @@
+On Thu, Sep 24, 2015 at 10:33 AM, <xiao-wen.chang@mcgill.ca> wrote:
+Hi everyone,
+
+There are two problems with Question 2:
+
+1. In the limit, "n goes to n " should be "n goes to infinity".
+
+2. "n=2, 3, ..., 60" should be "n=2, 3, ..., 70".
+
+Thank Kwang Il Park for bringing these to my attention.
+
+Best wishes,
+
+XWC
