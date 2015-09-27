@@ -17,5 +17,8 @@
 
 \item $x_{single} = 41$ and $x_{double} = 49$
 
+\item Because this sequence initally rises past $N_{max}$ ($3.402823466 \cdot 10^{38}$) before converging to $0$. So at some $n$, $x_n = \infty$ and since the program depends on $x_n$ to compute $x_{n+1}$, once it hits such $x_n = \infty$ it will always stay at $\infty$. \\
+The sequence rises to high values before coming back down because $100^n$ is much higher than $n!$ for at least the first 100 values of $n$.
+
 \end{enumerate}
 \end{document}
