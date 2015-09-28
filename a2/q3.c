@@ -16,8 +16,8 @@ void naive(int x_0, int n_max) {
 		double x_next = 2 * pow2n * (sqrt(1 + x_n / pow2n) - 1);
 		double p = x_next - l;
 		
-		//printf("x%i = %.16f, x%i-ln(x0+1) = %.16f\n", n+1, x_next, n+1, p);
-		printf("$%i$ & $%.16f$ & $%.16f$ \\\\ \n \\hline\n", n+1, x_next, p);
+		printf("x%i = %.16f, x%i-ln(x0+1) = %.16f\n", n+1, x_next, n+1, p);
+		//printf("$%i$ & $%.16f$ & $%.16f$ \\\\ \n \\hline\n", n+1, x_next, p);
 		x_n = x_next;
 		pow2n *= 2;
 	}
@@ -37,8 +37,8 @@ void improved(int x_0, int n_max) {
 		double x_next = 2 * x_n / (sqrt(1 + x_n / pow2n) + 1);
 		double p = x_next - l;
 		
-		//printf("x%i = %.16f, x%i-ln(x0+1) = %.16f\n", n+1, x_next, n+1, p);
-		printf("$%i$ & $%.16f$ & $%.16f$ \\\\ \n \\hline\n", n+1, x_next, p);
+		printf("x%i = %.16f, x%i-ln(x0+1) = %.16f\n", n+1, x_next, n+1, p);
+		//printf("$%i$ & $%.16f$ & $%.16f$ \\\\ \n \\hline\n", n+1, x_next, p);
 		x_n = x_next;
 		pow2n *= 2;
 	}
