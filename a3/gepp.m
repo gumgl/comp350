@@ -7,7 +7,7 @@ function x = gepp(A,b)
 %
 n = length(b);
 disp('Starting [A b]:');
-disp([A b.']);
+disp([A b]);
 for k = 1:n-1,
    [maxval, maxindex] = max(abs(A(k:n,k)));
    q = maxindex+k-1;
@@ -15,13 +15,13 @@ for k = 1:n-1,
    A([k,q],k:n) = A([q,k],k:n);
    b([k,q]) = b([q,k]);
    fprintf('Switching row %d with %d:\n',k,q);
-   disp([A b.']);
+   disp([A b]);
    for i = k+1:n
      mult = A(i,k)/A(k,k);
      fprintf('Reducing (k=%d, i=%d, mult=%f):\n',k,i,mult);
      A(i,k:n) = A(i,k:n)-mult*A(k,k:n); 
      b(i) = b(i) - mult*b(k);
-     disp([A b.']);
+     disp([A b]);
    end
 end
 x = zeros(n,1);
