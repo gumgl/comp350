@@ -1,8 +1,9 @@
-function root = newton(fname,fdname,x,xtol,ftol,n_max,display)
-% Newton's Method.
+function root = halley(fname,fdname,fddname,x,xtol,ftol,n_max,display)
+% Halley's Method.
 %
 % input:  fname is a string that names the function f(x).
 %         fdname is a string that names the derivative f'(x).
+%         fddname is a string that names the 2nd derivative f''(x).
 %         x is the initial point
 %         xtol and ftol are termination tolerances
 %         n_max is the maximum number of iteration
@@ -23,7 +24,8 @@ if abs(fx) <= ftol
 end
 for n = 1:n_max
     fdx = feval(fdname,x);
-    d = fx/fdx;
+    fddx = feval(fddname,x);
+    d = 2*fx*fdx / (2*fdx^2 - fddx*fx);
     x = x - d;
     fx = feval(fname,x);
     if display, 
