@@ -16,13 +16,16 @@ roots = secant('f', x0, x1, xtol, ftol, n_max, display);
 min = 0;
 max = 3;
 num_points = 1000;
+limits = [min max]
 
 x = min:abs(max-min)/num_points:max;
 xmarkers = [x0 x1 roots]; % place markers at these x-values
 ymarkers = f(xmarkers);
 figure;
-plot(x,f(x),'g',x,fd(x),'r',x,fdd(x),'c',[min,max],[0,0],xmarkers,ymarkers,'g*');
-%plot(x,fd(x));
+plot(x,f(x),'g',x,fd(x),'r',x,fdd(x),'c',limits,[0,0],xmarkers,ymarkers,'g*');
+%fplot('f', limits, 'g');
+%fplot('fd', limits, 'r');
+%fplot('fdd', limits, 'c');
 title('Approximation of Roots with Different Methods')
 xlabel('x')
 ylabel('y')
