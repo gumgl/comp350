@@ -20,7 +20,7 @@
  
 \begin{enumerate}
 \item \begin{enumerate}
-\item
+\item 
 \item We start with the Taylor series expansion of $f(x)$ about $x_0$:
 \begin{align*}
 f(x) &= f(x_0) + f'(x_0)(x-x_0) + \frac{f''(x_0)}{2}(x-x_0)^2 \\
@@ -34,6 +34,63 @@ x &= x_0 - \frac{2f(x_0)f'(x_0)}{2\big[f'(x_0)\big]^2 - f(x_0) f''(x_0)}
 \end{align*}
 This is also known as Halley's method. See attached file \texttt{halley.m} for its implementation.
 \end{enumerate}
-\item See attached file \emph{secant.m}.
+\item The computed roots for each methods are in Table \ref{table:roots} and the results of each of their iteration steps are in Tables \ref{table:bisection}, \ref{table:newton}, \ref{table:halley} and \ref{table:secant}. The graph of $y=f(x)$ (in green) and $y=f'(x)$ (in red) are in Figure \ref{fig:q2plot}.
+
+See attached function files \texttt{halley.m} and \texttt{secant.m} for the implementation of the new root-finding methods.
+
+See attached function files \texttt{f.m}, \texttt{fd.m} and \texttt{fdd.m} for the implementation of $f(x)$, $f'(x)$ and $f''(x)$.
+
+See attached script file \texttt{q2.m} for the commands generating the results and the plot. In this case, we used $n_{max}=10^5$, $x_0=1$, $x_1=2$.
+
+As we can see, Halley's method is the fastest with 3 iterations since it has cubic convergence but it requires $f'(x)$ and $f''(x)$. Newton's method comes as a close second with 4 iterations since it converges quadratically but requires $f'(x)$. Not far after, the secant method converging super-linearly takes 8 iterations to reach the same degree of precision without requiring a derivative of $f(x)$. Then far behind the others, the bisection method took 40 iterations. That is 5 times more than the next fastest method and more than 13 times more than the fastest, because it has linear convergence.
+
+\begin{table}[h]
+  \centering
+  \begin{tabular}{| l | l | c |}
+  \hline
+  Method & Computed root & Number of iterations\\ \hline
+  Bisection & $1.834243184314801$ & $40$ \\ \hline
+  Newton's & $1.834243184314032$ & $4$ \\ \hline
+  Halley's & $1.834243184313922$ & $3$ \\ \hline
+  Secant & $1.834243184313922$ & $8$ \\ \hline
+  \end{tabular}
+  \caption{Comparison of all methods}
+  \label{table:roots}
+\end{table}
+
+\begin{table}[h]
+  \centering
+  \include{q2bisection}
+  \caption{Results of the bisection method}
+  \label{table:bisection}
+\end{table}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.8\textwidth]{q2plotv}
+  \caption{$f(x)$ is shown in green, with the points $\big(x_0,f(x_0)\big)$ and $\big(x_1,f(x_1)\big)$. $f'(x)$ and $f''(x)$ are shown in red and cyan.}
+  \label{fig:q2plot}
+\end{figure}
+
+\begin{table}[h]
+  \centering
+  \include{q2newton}
+  \caption{Results of the Newton's method}
+  \label{table:newton}
+\end{table}
+
+\begin{table}[h]
+  \centering
+  \include{q2halley}
+  \caption{Results of Halley's method}
+  \label{table:halley}
+\end{table}
+
+\begin{table}[h]
+  \centering
+  \include{q2secant}
+  \caption{Results of the secant method}
+  \label{table:secant}
+\end{table}
 \end{enumerate}
 \end{document}
