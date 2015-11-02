@@ -12,10 +12,14 @@ function root = secant(fname,x0,x1,xtol,ftol,n_max,display)
 n = 0;
 fx0 = feval(fname,x0);
 fx1 = feval(fname,x1);
-if display, 
-   disp('   n             x                    f(x)');
-   disp('------------------------------------------------------');
-   fprintf('%4d %23.15e %23.15e', n, x1, fx1);
+if display == 1, 
+   disp(' --Secant Method--');
+   disp('   n             x1                   f(x1)');
+   fprintf('%4d %23.15e %23.15e\n', n, x1, fx1);
+elseif display == 2,
+   disp(' --Secant Method (LaTeX table)--');
+   disp('$n$ & $x_1$ & $f(x_1)$\\');
+   fprintf('$%4d$ & $%23.15e$ & $%23.15e$\\\\\n', n, x1, fx1);
 end
 if abs(fx1) <= ftol
    root = x1;
@@ -29,8 +33,11 @@ for n = 1:n_max
     x1 = x1-d;
     fx1 = feval(fname,x1); % Calculate new f(x1)
     
-    if display, 
-       disp(sprintf('%4d %23.15e %23.15e', n, x, fx)), end
+    if display == 1, 
+       fprintf('%4d %23.15e %23.15e\n', n, x1, fx1),
+    elseif display == 2,
+       fprintf('$%4d$ & $%23.15e$ & $%23.15e$\\\\\n', n, x1, fx1);
+    end
     if abs(d) <= xtol | abs(fx1) <= ftol
        root = x1;
        return

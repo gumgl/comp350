@@ -25,11 +25,14 @@ end
 c = (a+b)/2;
 fc = feval(fname,c);
 e_bound = abs(b-a)/2;
-if display, 
-   disp(' ');
-   disp('       a            b            c           f(c)      error_bound');
-   disp(' ');
-   disp([a b c fc e_bound])
+if display == 1, 
+   disp(' --Bisection Method--');
+   disp('    a         b         c         f(c)      error_bound');
+   disp([a b c fc e_bound]);
+elseif display == 2,
+   disp(' --Bisection Method (LaTeX table)--');
+   disp('$a$ & $b$ & $f(c)$ & $f(c)$ & error_bound \\');
+   fprintf('$%23.15e$ & $%23.15e$ & $%23.15e$ & $%23.15e$ & $%23.15e$\\\\\n', a, b, c, fc, e_bound);
 end
 while e_bound > delta
    if fc == 0, 
@@ -46,7 +49,11 @@ while e_bound > delta
    c = (a+b)/2;
    fc = feval(fname,c);
    e_bound = e_bound/2;
-   if display, disp([a b c fc e_bound]), end
+   if display == 1,
+       disp([a b c fc e_bound]);
+   elseif display == 2,
+       fprintf('$%23.15e$ & $%23.15e$ & $%23.15e$ & $%23.15e$ & $%23.15e$\\\\\n', a, b, c, fc, e_bound);
+    end
 end
 root = c;
 
