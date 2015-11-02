@@ -3,6 +3,8 @@
 \usepackage{amsmath, amssymb}
 \usepackage[margin=0.7in]{geometry}
 \usepackage{float}
+\usepackage{graphicx}
+\usepackage{epstopdf}
 \restylefloat{table}
 
 \author{Guillaume Labranche (260585371)}
@@ -19,7 +21,18 @@
 \begin{enumerate}
 \item \begin{enumerate}
 \item
-\item
+\item We start with the Taylor series expansion of $f(x)$ about $x_0$:
+\begin{align*}
+f(x) &= f(x_0) + f'(x_0)(x-x_0) + \frac{f''(x_0)}{2}(x-x_0)^2 \\
+f(x) &= f(x_0) + \Big(f'(x_0) + \frac{f''(x_0)}{2}(x-x_0)\Big) (x-x_0)
+\end{align*}
+We use the facts that $f(x)=0$ and $(x-x_0)=-\frac{f(x_0)}{f'(x_0)}$ (Newton's method):
+\begin{align*}
+0 &= f(x_0) + \Big(f'(x_0) - \frac{f''(x_0)}{2} \cdot \frac{f(x_0)}{f'(x_0)} \Big) (x-x_0) \\
+x-x_0 &= \frac{-f(x_0)}{f'(x_0) - \frac{f''(x_0) f(x_0)}{2 f'(x_0)}} \\
+x &= x_0 - \frac{2f(x_0)f'(x_0)}{2\big[f'(x_0)\big]^2 - f(x_0) f''(x_0)} 
+\end{align*}
+This is also known as Halley's method. See attached file \texttt{halley.m} for its implementation.
 \end{enumerate}
 \item See attached file \emph{secant.m}.
 \end{enumerate}
