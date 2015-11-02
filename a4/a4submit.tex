@@ -20,7 +20,7 @@
  
 \begin{enumerate}
 \item \begin{enumerate}
-\item 
+\item After many hours of staring at this problem, clicking every Google result on the topic and not having a single clue, I give up. No idea what is going on or even where to start. I don't see why Newton's method doesn't converge quadratically with multiple roots. I don't even understand why adding the $m$ in this ``modified'' method is better than Newton's method or why it changes the rate of convergence.
 \item We start with the Taylor series expansion of $f(x)$ about $x_0$:
 \begin{align*}
 f(x) &= f(x_0) + f'(x_0)(x-x_0) + \frac{f''(x_0)}{2}(x-x_0)^2 \\
@@ -65,13 +65,6 @@ As we can see, Halley's method is the fastest with 3 iterations since it has cub
   \label{table:bisection}
 \end{table}
 
-\begin{figure}
-  \centering
-  \includegraphics[width=0.8\textwidth]{q2plotv}
-  \caption{$f(x)$ is shown in green, with the points $\big(x_0,f(x_0)\big)$ and $\big(x_1,f(x_1)\big)$. $f'(x)$ and $f''(x)$ are shown in red and cyan.}
-  \label{fig:q2plot}
-\end{figure}
-
 \begin{table}[h]
   \centering
   \include{q2newton}
@@ -92,5 +85,12 @@ As we can see, Halley's method is the fastest with 3 iterations since it has cub
   \caption{Results of the secant method}
   \label{table:secant}
 \end{table}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.8\textwidth]{q2plotv}
+  \caption{$f(x)$ is shown in green, with the points $\big(x_0,f(x_0)\big)$ and $\big(x_1,f(x_1)\big)$. $f'(x)$ and $f''(x)$ are shown in red and cyan.}
+  \label{fig:q2plot}
+\end{figure}
 \end{enumerate}
 \end{document}
