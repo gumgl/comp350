@@ -1,0 +1,72 @@
+\documentclass{article}
+
+\usepackage{mathtools}
+\usepackage[margin=0.7in]{geometry}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage{xfrac}
+\restylefloat{table}
+
+\author{Guillaume Labranche (260585371)}
+\title{Assignment \#5\\Numerical Computing (COMP 350)}
+\date{due on 16 November 2015}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\F}{\mathbb{F}}
+
+\begin{document}
+
+\maketitle
+
+\begin{enumerate}
+\item 
+\begin{itemize}
+\item Vandermonde form (using \texttt{vander\_coef.m}): \begin{equation*}
+p(x) = 2 - x + 2x^2 - x^3
+\end{equation*}
+
+\item Lagrange form (by hand):\begin{align*}
+p(x) &= (x-1)(x-2)(x-3)(x-4)\bigg(
+\frac{\frac{2}{(1-2)(1-3)(1-4)}}{(x-1)} +
+\frac{\frac{0}{(2-1)(2-3)(2-4)}}{(x-2)} +
+\frac{\frac{-10}{(3-1)(3-2)(3-4)}}{(x-3)} +
+\frac{\frac{-34}{(4-1)(4-2)(4-3)}}{(x-4)}
+\bigg)
+\\ &= (x-1)(x-2)(x-3)(x-4)\bigg(
+\frac{\frac{2}{(-1)(-2)(-3)}}{(x-1)} +
+%\frac{\frac{0}{(1)(-1)(-2)}}{(x-2)} +
+\frac{\frac{-10}{(2)(1)(-1)}}{(x-3)} +
+\frac{\frac{-34}{(3)(2)(1)}}{(x-4)}
+\bigg)
+\\ &= (x-1)(x-2)(x-3)(x-4)\bigg(
+\frac{\sfrac{2}{{-6}}}{(x-1)} +
+%\frac{\sfrac{0}{2}}{(x-2)} +
+\frac{\sfrac{{-10}}{{-2}}}{(x-3)} +
+\frac{\sfrac{{-34}}{6}}{(x-4)}
+\bigg)
+\\ &=
+\frac{-1}{{3}}\cdot (x-2)(x-3)(x-4) +
+%\frac{0}{2}\cdot (x-1)(x-3)(x-4) +
+5 \cdot (x-1)(x-2)(x-4) +
+\frac{{-17}}{3}\cdot (x-1)(x-2)(x-3)
+\\ &=
+\frac{-1}{{3}}\cdot (x^3-9 x^2+26 x-24) +
+%\frac{0}{2}\cdot (x^3-8 x^2+19 x-12) +
+5 \cdot (x^3-7 x^2+14 x-8) +
+\frac{{-17}}{3}\cdot (x^3-6 x^2+11 x-6)
+\\ p(x) &= -x^3+2 x^2-x+2
+\end{align*}
+%wolfram-ready format:
+%\frac{-1}{3} * (x^3-9 x^2+26 x-24) + 5 * (x^3-7 x^2+14 x-8) + \frac{-17}{3} * (x^3-6 x^2+11 x-6)
+
+\item Newton form (by hand):\begin{align*}
+p_0(x) &= 2 \\
+p_1(x) &= 2 -2(x-1) \\
+p_2(x) &= 2 -2(x-1) - 4(x-1)(x-2) \\
+p_n(x) = p_3(x) &= 2 -2(x-1) - 4(x-1)(x-2) - (x-1)(x-2)(x-3) \\
+\end{align*}
+
+\end{itemize}
+\end{enumerate}
+\end{document}
