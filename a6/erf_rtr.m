@@ -3,9 +3,9 @@ function y = erf_rtr(t, tol)
 
 f = @(x) exp(-x^2);
 
-c = 2/sqrt(pi);
+m = 2/sqrt(pi);
 
-y = c * rtr(f, 0, t, tol/c);
+y = m * rtr(f, 0, t, tol/m);
 
 end
 

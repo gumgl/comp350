@@ -1,0 +1,44 @@
+\documentclass{article}
+
+\usepackage{mathtools}
+\usepackage[margin=0.7in]{geometry}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage{xfrac}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\hypersetup{
+    colorlinks,
+    linkcolor={red!50!black},
+    citecolor={blue!50!black},
+    urlcolor={blue!80!black}
+}
+\restylefloat{table}
+
+\author{Guillaume Labranche (260585371)}
+\title{Assignment \#6\\Numerical Computing (COMP 350)}
+\date{due on 30 November 2015}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\F}{\mathbb{F}}
+
+\begin{document}
+
+\maketitle
+
+\begin{enumerate}
+\item 
+See \texttt{q1.m} for the script displaying the results.
+\begin{enumerate}
+\item erf(3) was computed to be  0.99997550396668711 in 17 function evaluations ($2^4=16$ subintervals).
+
+See function \texttt{erf\_rtr.m} and \texttt{rtr.m} for the source code.
+
+\item erf(3) was computed to be 0.99997747287883731 in 41 function evaluations. I was able to save function evaluations by passing $f(a)$, $f(b)$ and $f(c)$ to the next iteration step.
+
+See function \texttt{erf\_asm.m} and \texttt{asm.m} for the source code.
+\end{enumerate}
+
+\end{enumerate}
+\end{document}
