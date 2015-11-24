@@ -1,6 +1,8 @@
 \documentclass{article}
 
 \usepackage{mathtools}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
 \usepackage[margin=0.7in]{geometry}
 \usepackage{float}
 \usepackage{graphicx}
@@ -27,18 +29,56 @@
 
 \maketitle
 
+See \texttt{script.m} for the script aggregating the results of all questions.
 \begin{enumerate}
-\item 
-See \texttt{q1.m} for the script displaying the results.
-\begin{enumerate}
+\item \begin{enumerate}
 \item erf(3) was computed to be  0.99997550396668711 in 17 function evaluations ($2^4=16$ subintervals).
 
-See function \texttt{erf\_rtr.m} and \texttt{rtr.m} for the source code.
+See functions \texttt{erf\_rtr.m} and \texttt{rtr.m} for the MATLAB implementation.
 
-\item erf(3) was computed to be 0.99997747287883731 in 41 function evaluations. I was able to save function evaluations by passing $f(a)$, $f(b)$ and $f(c)$ to the next iteration step.
+\item erf(3) was computed to be 0.99997747287883731 in 41 function evaluations. I was able to save function evaluations by passing $f(a)$, $f(b)$ and $f(c)$ to the next recursion level.
 
-See function \texttt{erf\_asm.m} and \texttt{asm.m} for the source code.
+See functions \texttt{erf\_asm.m} and \texttt{asm.m} for the MATLAB implementation.
 \end{enumerate}
 
+\item \begin{enumerate}
+
+\item First, we must map the $x$-values from $x \in [a,b]$ to $u \in [-1,1]$: \begin{align*}
+u &= \Big(x-\frac{a+b}{2}\Big)\frac{1-(-1)}{b-a} \\
+\frac{b-a}{2}u + \frac{a+b}{2} &= x \\
+\frac{b-a}{2}du &= dx
+\end{align*}
+We use $-\frac{a+b}{2}$ to center around 0 and multiply by $\frac{2}{b-a}$ to scale the range.
+
+We can now use our Gaussian two-point quadrature rule: \begin{align*}
+\int_a^b f(x)dx &= \frac{b-a}{2} \cdot \int_{-1}^1 f(\tfrac{b-a}{2}u + \tfrac{a+b}{2})du
+\\ &\approx
+\frac{b-a}{2} \cdot \Big( 
+f(\tfrac{b-a}{2}\cdot \tfrac{-\sqrt{3}}{3} + \tfrac{a+b}{2}) + 
+f(\tfrac{b-a}{2}\cdot \tfrac{\sqrt{3}}{3} + \tfrac{a+b}{2}) \Big)
+\end{align*}
+Then we divide the interval $[a,b]$ into $n$ equal subintervals $[x_i,x_{i+1}]$, $i = 0,1,\ldots,n-1$. Let $h=\frac{b-a}{n}$:
+\begin{align*}
+\int_a^b f(x)dx &= \sum_{i=0}^{n-1} \int_{h \cdot i + a}^{h \cdot (i+1) + a} f(x)dx
+\\ &\approx
+\frac{h}{2} \sum_{i=0}^{n-1} \Big(
+f\big(\tfrac{h}{2} \cdot \tfrac{-\sqrt{3}}{3} + \tfrac{h(2i+1)}{2} + a\big) +
+f\big(\tfrac{h}{2} \cdot \tfrac{\sqrt{3}}{3} + \tfrac{h(2i+1)}{2} + a\big) 
+\Big)
+\\ &=
+\frac{h}{2} \sum_{i=0}^{n-1} \Big(
+f\big(h \cdot i + \tfrac{h}{2} - \tfrac{h}{2\sqrt{3}} + a\big) +
+f\big(h \cdot i + \tfrac{h}{2} + \tfrac{h}{2\sqrt{3}} + a\big)
+\Big)
+\end{align*}
+
+\item Because in question 1.(a) $m=16$, $n=\floor*{\frac{17}{2}}=8$. There are $2n=16$ function evaluations. The value computed is 0.99997801381341089.
+
+See functions \texttt{erf\_cgtpq.m} and \texttt{cgtpq.m} for the MATLAB implementation.
+
+When comparing the percent error of both results with respect to the correct value 0.99997790950300136 (provided by the MATLAB built-in function \texttt{erf(3)}), we find that the composite Gaussian two-point quadrature
+rule yields a result 23 times closer to the correct value than the recursive trapezoid rule while using 1 less function evaluation. A significant improvement to say the least!
+
+\end{enumerate}
 \end{enumerate}
 \end{document}
